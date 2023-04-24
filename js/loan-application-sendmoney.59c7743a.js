@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["loan-application-sendmoney"],{"99a1":function(n,e,a){"use strict";a.r(e);var o=a("7a23");function t(n,e,a,t,c,r){return Object(o["A"])(),Object(o["h"])("div",null," SendMoney Page ")}var c={},r=a("d959"),d=a.n(r);const i=d()(c,[["render",t]]);var p=i;e["default"]=p}}]);
+//# sourceMappingURL=loan-application-sendmoney.59c7743a.js.map

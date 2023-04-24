@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["archieve"],{b037:function(e,n,r){"use strict";r.r(n);var c=r("7a23");function a(e,n,r,a,t,i){return Object(c["A"])(),Object(c["h"])("div",null," Archieve Page ")}var t={},i=r("d959"),o=r.n(i);const u=o()(t,[["render",a]]);var d=u;n["default"]=d}}]);
+//# sourceMappingURL=archieve.1635aeef.js.map
