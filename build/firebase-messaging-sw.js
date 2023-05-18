@@ -87,14 +87,27 @@ self.addEventListener('notificationclick', (event) => {
 	// console.log('123');
 
 	event.waitUntil(
-		fetch('http://kserver3.prod/incognito/api/v2/login', { method: 'POST' }) // отправка POST-запроса на сервер
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('Уведомление закрыто и данные отправлены на сервер:', data);
-			})
-			.catch((error) => {
-				console.error('Ошибка при отправке данных на сервер:', error);
-			}),
+	var url = "https://cleaner.dadata.ru/api/v1/clean/address";
+	var token = "41477dda45344329060ec02db8426fc41798259c";
+	var secret = "caac010b64c0b16e692ce231df076c8541efb60f";
+	var query = "мск сухонска 11/-89";
+	
+	var options = {
+		method: "POST",
+		mode: "cors",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": "Token " + token,
+			"X-Secret": secret
+		},
+		body: JSON.stringify([query])
+	}
+
+	fetch(url, options)
+		.then(response => response.text())
+		.then(result => console.log(result))
+		.catch(error => console.log("error", error));
+
 	);
 	// This looks to see if the current is already open and focuses if it is
 	// event.waitUntil(clients.matchAll({
