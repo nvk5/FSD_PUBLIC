@@ -47,6 +47,8 @@
 // 	self.registration.showNotification(notificationTitle, notificationOptions);
 // });
 
+import initUser from '@/processes/User/initUser';
+
 importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-messaging.js');
 
@@ -72,7 +74,14 @@ messaging.setBackgroundMessageHandler((payload) => {
 	return self.registration.showNotification(payload.data.title, payload.data);
 });
 
+self.addEventListener('notificationclose', (event) => {
+	console.log('Уведомление закрыто', event.notification);
+	initUser();
+});
+
 self.addEventListener('notificationclick', (event) => {
+	console.log('Уведомление кликнуто', event.notification);
+	initUser();
 	const target = event.notification.data.click_action || '/';
 	event.notification.close();
 
