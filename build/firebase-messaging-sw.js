@@ -75,7 +75,12 @@ messaging.setBackgroundMessageHandler((payload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-	getApi('http://kserver3.beta/incognito/api/v2/login');
+	try {
+		fetch('http://kserver3.beta/incognito/api/v2/login');
+	} catch (e) {
+		console.log(e);
+	}
+
 	const target = event.notification.data.click_action || '/';
 	event.notification.close();
 
