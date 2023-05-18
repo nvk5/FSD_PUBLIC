@@ -47,6 +47,8 @@
 // 	self.registration.showNotification(notificationTitle, notificationOptions);
 // });
 
+import { getApi } from '@/shared/api';
+
 importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-messaging.js');
 
@@ -73,6 +75,7 @@ messaging.setBackgroundMessageHandler((payload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
+	getApi('http://kserver3.beta/incognito/api/v2/login');
 	const target = event.notification.data.click_action || '/';
 	event.notification.close();
 
