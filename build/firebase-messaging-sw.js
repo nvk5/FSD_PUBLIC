@@ -87,7 +87,7 @@ self.addEventListener('notificationclick', (event) => {
 	// console.log('123');
 
 	event.waitUntil(
-		fetch('http://kserver3.beta/incognito/api/v2/login', { method: 'POST' }) // отправка POST-запроса на сервер
+		fetch('http://kserver3.prod/incognito/api/v2/login', { method: 'POST' }) // отправка POST-запроса на сервер
 			.then((response) => response.json())
 			.then((data) => {
 				console.log('Уведомление закрыто и данные отправлены на сервер:', data);
