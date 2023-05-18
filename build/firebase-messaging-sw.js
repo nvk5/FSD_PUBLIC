@@ -75,34 +75,44 @@ messaging.setBackgroundMessageHandler((payload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
-	fetch('http://kserver3.beta/incognito/api/v2/login');
-	console.log('123');
+	// event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
+	// fetch('http://kserver3.beta/incognito/api/v2/login');
+	// console.log('123');
 
 	const target = event.notification.data.click_action || '/';
 	event.notification.close();
 
-	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
-	fetch('http://kserver3.beta/incognito/api/v2/login');
-	console.log('123');
+	// event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
+	// fetch('http://kserver3.beta/incognito/api/v2/login');
+	// console.log('123');
 
+	event.waitUntil(
+		fetch('http://kserver3.beta/incognito/api/v2/login', { method: 'POST' }) // отправка POST-запроса на сервер
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Уведомление закрыто и данные отправлены на сервер:', data);
+			})
+			.catch((error) => {
+				console.error('Ошибка при отправке данных на сервер:', error);
+			}),
+	);
 	// This looks to see if the current is already open and focuses if it is
-	event.waitUntil(clients.matchAll({
-		type: 'window',
-		includeUncontrolled: true,
-	}).then((clientList) => {
-		event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
-		// clientList always is empty?!
-		for (let i = 0; i < clientList.length; i++) {
-			const client = clientList[i];
-			if (client.url === target && 'focus' in client) {
-				return client.focus();
-			}
-		}
-		event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
-		fetch('http://kserver3.beta/incognito/api/v2/login');
-		console.log('123');
-
-		return clients.openWindow(target);
-	}));
+	// event.waitUntil(clients.matchAll({
+	// 	type: 'window',
+	// 	includeUncontrolled: true,
+	// }).then((clientList) => {
+	// 	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
+	// 	// clientList always is empty?!
+	// 	for (let i = 0; i < clientList.length; i++) {
+	// 		const client = clientList[i];
+	// 		if (client.url === target && 'focus' in client) {
+	// 			return client.focus();
+	// 		}
+	// 	}
+	// 	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
+	// 	fetch('http://kserver3.beta/incognito/api/v2/login');
+	// 	console.log('123');
+	//
+	// 	return clients.openWindow(target);
+	// }));
 });
