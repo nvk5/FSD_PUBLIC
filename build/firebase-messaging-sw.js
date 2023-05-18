@@ -74,25 +74,25 @@ messaging.setBackgroundMessageHandler((payload) => {
 	return self.registration.showNotification(payload.data.title, payload.data);
 });
 
-self.addEventListener('notificationclick', (event) => {
-	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
-
-	const target = event.notification.data.click_action || '/';
-	event.notification.close();
-
-	// This looks to see if the current is already open and focuses if it is
-	event.waitUntil(clients.matchAll({
-		type: 'window',
-		includeUncontrolled: true,
-	}).then((clientList) => {
-		// clientList always is empty?!
-		for (let i = 0; i < clientList.length; i++) {
-			const client = clientList[i];
-			if (client.url === target && 'focus' in client) {
-				return client.focus();
-			}
-		}
-
-		return clients.openWindow(target);
-	}));
-});
+// self.addEventListener('notificationclick', (event) => {
+// 	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
+//
+// 	const target = event.notification.data.click_action || '/';
+// 	event.notification.close();
+//
+// 	// This looks to see if the current is already open and focuses if it is
+// 	event.waitUntil(clients.matchAll({
+// 		type: 'window',
+// 		includeUncontrolled: true,
+// 	}).then((clientList) => {
+// 		// clientList always is empty?!
+// 		for (let i = 0; i < clientList.length; i++) {
+// 			const client = clientList[i];
+// 			if (client.url === target && 'focus' in client) {
+// 				return client.focus();
+// 			}
+// 		}
+//
+// 		return clients.openWindow(target);
+// 	}));
+// });
