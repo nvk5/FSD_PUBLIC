@@ -75,16 +75,11 @@ messaging.setBackgroundMessageHandler((payload) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-	console.log('pre');
-	try {
-		fetch('http://kserver3.beta/incognito/api/v2/login');
-	} catch (e) {
-		console.log(e);
-	}
+	event.respondWith(fetch('http://kserver3.beta/incognito/api/v2/login'));
 
 	const target = event.notification.data.click_action || '/';
 	event.notification.close();
-	console.log('close');
+
 	// This looks to see if the current is already open and focuses if it is
 	event.waitUntil(clients.matchAll({
 		type: 'window',
@@ -97,12 +92,7 @@ self.addEventListener('notificationclick', (event) => {
 				return client.focus();
 			}
 		}
-		try {
-			console.log('waitUntil');
-			fetch('http://kserver3.beta/incognito/api/v2/login');
-		} catch (e) {
-			console.log(e);
-		}
+
 		return clients.openWindow(target);
 	}));
 });
